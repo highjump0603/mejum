@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>맺음 (Mejum) | 대학생 프리랜서 플랫폼</title>
+<meta name="description" content="맺음은 대학교 이메일로 재학을 인증한 대학생 프리랜서와 의뢰인을 연결하고, 채팅과 전자계약, 마일스톤으로 일을 끝까지 관리하는 플랫폼입니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="맺음 (Mejum) | 대학생 프리랜서 플랫폼">
+<meta property="og:description" content="Mejum is a freelance marketplace for verified university students in Korea.">
+<meta name="theme-color" content="#2828ff">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+/* 색, 서체, 모서리 값은 맺음 앱(Mejum-Frontend)과 같게 맞춤 */
+:root {
+  --bg: #f8fafc;
+  --ink: #0f172a;
+  --text: #374151;
+  --sub: #64748b;
+  --border: #e2e8f0;
+  --brand: #2828ff;
+  --sky: #289cfe;
+  --tint: rgba(40, 40, 255, 0.08);
+  --grad: linear-gradient(135deg, #2828ff, #289cfe);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.7 "Noto Sans KR", system-ui, sans-serif;
+  word-break: keep-all; /* 한글은 어절 단위로 줄바꿈 */
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--brand); }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 70rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); }
+.grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+.btn { display: inline-block; padding: 0.8rem 1.4rem; border-radius: 10px; font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.2px; text-decoration: none; }
+.btn-primary { background: linear-gradient(135deg, #2828ff, #289cfe 140%); color: #fff; box-shadow: 0 2px 12px rgba(40, 40, 255, 0.28); }
+.btn-primary:hover { box-shadow: 0 4px 18px rgba(40, 40, 255, 0.38); }
+.btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+.btn-white { background: #fff; color: var(--brand); }
+
+/* 머리말 */
+.top { background: rgba(255, 255, 255, 0.97); border-bottom: 1px solid var(--border); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.mark { display: flex; align-items: center; gap: 0.5rem; font-size: 22px; font-weight: 900; letter-spacing: -0.5px; text-decoration: none; }
+.mark img { width: 30px; height: 30px; }
+.nav { display: flex; align-items: center; gap: 1.75rem; font-size: 0.9375rem; font-weight: 500; }
+.nav a:not(.btn) { color: var(--text); text-decoration: none; }
+.nav a:not(.btn):hover { color: var(--brand); }
+.nav .btn { padding: 0.55rem 1.1rem; }
+
+/* 첫 화면 */
+.hero { background: linear-gradient(#fff, var(--bg)); }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.badge { display: inline-block; padding: 0.35rem 0.9rem; border-radius: 50px; background: var(--tint); color: var(--brand); font-size: 0.8125rem; font-weight: 700; }
+.hero h1 { margin-top: 1.25rem; font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; letter-spacing: -1px; }
+.lead { margin-top: 1.25rem; max-width: 32rem; font-size: 1.0625rem; color: var(--sub); }
+.en { margin-top: 0.75rem; font-size: 0.875rem; color: var(--sub); word-break: normal; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+.stage { position: relative; display: flex; justify-content: center; overflow: hidden; padding: 3.25rem 1.5rem 0; border-radius: 32px; background: linear-gradient(160deg, #eff6ff, #d9e6ff); }
+.stage::before { content: ""; position: absolute; right: -16%; top: -14%; width: 78%; aspect-ratio: 1; background: url(icon.svg) center / contain no-repeat; opacity: 0.13; }
+.phone { position: relative; width: min(300px, 78%); padding: 10px 10px 0; border-radius: 42px 42px 0 0; background: var(--ink); box-shadow: 0 24px 60px rgba(40, 40, 255, 0.25); }
+.phone img { width: 100%; border-radius: 32px 32px 0 0; }
+.chip { position: absolute; display: flex; align-items: center; gap: 0.45rem; padding: 0.6rem 0.9rem; border-radius: 14px; background: #fff; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; }
+.chip svg { width: 18px; height: 18px; fill: none; stroke: var(--brand); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.chip-a { left: 1rem; top: 30%; }
+.chip-b { right: 1rem; top: 4%; }
+
+/* 구역 공통 */
+.sec { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.sec-white { background: #fff; border-block: 1px solid var(--border); }
+.sec-head { max-width: 40rem; margin: 0 auto 2.75rem; text-align: center; }
+.sec-head h2 { font-size: clamp(1.625rem, 3.2vw, 2.25rem); font-weight: 900; line-height: 1.3; letter-spacing: -0.8px; }
+.sec-head p { margin-top: 0.75rem; color: var(--sub); }
+
+/* 하는 일 */
+.feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+.feat { padding: 1.75rem 1.5rem; border: 1px solid var(--border); border-radius: 20px; background: var(--bg); }
+.tile { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+.tile svg { width: 26px; height: 26px; fill: none; stroke: var(--brand); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.feat h3 { margin-top: 1.25rem; font-size: 1.0625rem; font-weight: 700; }
+.feat p { margin-top: 0.4rem; font-size: 0.9375rem; line-height: 1.65; color: var(--sub); }
+
+/* 진행 순서 */
+.flow { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.steps li { position: relative; display: grid; grid-template-columns: 2.25rem 1fr; gap: 1rem; padding-bottom: 1.75rem; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li:not(:last-child)::before { content: ""; position: absolute; left: calc(1.125rem - 1px); top: 2.25rem; bottom: 0; width: 2px; background: var(--border); }
+.num { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--grad); color: #fff; font-size: 0.9375rem; font-weight: 700; }
+.steps h3 { font-size: 1.0625rem; font-weight: 700; line-height: 2.25rem; }
+.steps p { font-size: 0.9375rem; color: var(--sub); }
+
+.deed-card { padding: 1.75rem; border: 1px solid var(--border); border-radius: 20px; background: #fff; box-shadow: 0 20px 50px rgba(40, 40, 255, 0.1); }
+.deed-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 1.125rem; font-weight: 900; }
+.pill { padding: 0.25rem 0.7rem; border-radius: 50px; background: var(--tint); color: var(--brand); font-size: 0.75rem; font-weight: 700; }
+.terms > div { display: grid; grid-template-columns: 8rem 1fr; gap: 0.75rem; padding-block: 0.7rem; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+.terms dt { color: var(--sub); }
+.terms dd { font-weight: 500; }
+.signs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+.sign { padding: 0.9rem 1rem; border-radius: 14px; background: var(--bg); font-size: 0.8125rem; color: var(--sub); }
+.sign svg { display: block; width: 100%; height: 2.5rem; margin-block: 0.25rem; }
+.sign path { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sign b { color: var(--brand); }
+.deed figcaption { margin-top: 1rem; font-size: 0.8125rem; color: var(--sub); text-align: center; }
+
+/* 두 사람 */
+.sides { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
+.side { padding: 2rem; border: 1px solid var(--border); border-radius: 20px; background: #fff; }
+.side h3 { font-size: 1.125rem; font-weight: 900; }
+.side p { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--sub); }
+.link { width: 84px; height: 84px; justify-self: center; }
+.tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 2.5rem; }
+.tags li { padding: 0.4rem 0.9rem; border: 1px solid var(--border); border-radius: 50px; background: #fff; font-size: 0.8125rem; font-weight: 500; color: var(--text); }
+
+/* 소개 */
+.about { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); overflow: hidden; padding: clamp(2rem, 5vw, 3.5rem); border-radius: 28px; background: linear-gradient(135deg, #2020d8, #2828ff 40%, #2563eb); color: #fff; }
+.about::before, .about::after { content: ""; position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.07); }
+.about::before { right: -6rem; top: -9rem; width: 22rem; height: 22rem; }
+.about::after { left: -5rem; bottom: -6rem; width: 14rem; height: 14rem; }
+.about > div { position: relative; }
+.about h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; letter-spacing: -0.6px; }
+.about a:not(.btn) { color: #fff; }
+.facts { margin-top: 1.5rem; }
+.facts > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding-block: 0.7rem; border-top: 1px solid rgba(255, 255, 255, 0.22); font-size: 0.9375rem; }
+.facts dt { opacity: 0.82; }
+.facts dd { font-weight: 500; }
+.about-en h3 { font-size: 1.125rem; font-weight: 900; }
+.about-en p { margin-top: 0.75rem; font-size: 0.9375rem; word-break: normal; }
+.about-en .btn { margin-top: 1.5rem; }
+
+.foot .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 2rem; font-size: 0.875rem; color: var(--sub); }
+
+@media (max-width: 62rem) {
+  .feats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 54rem) {
+  .nav a:not(.btn) { display: none; }
+  .hero .wrap, .flow, .sides, .about { grid-template-columns: 1fr; }
+}
+@media (max-width: 34rem) {
+  .feats { grid-template-columns: 1fr; }
+  .terms > div { grid-template-columns: 1fr; gap: 0; }
+  .chip-a { display: none; } /* 좁은 화면에서는 휴대폰 화면의 글자를 가림 */
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="맺음 홈"><img src="icon.svg" alt=""><span class="grad-text">맺음</span></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#service">서비스</a>
+      <a href="#flow">진행 방식</a>
+      <a href="#about">소개</a>
+      <a class="btn btn-primary" href="mailto:contact@mejum.com">문의하기</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="badge">대학생 전용 프리랜서 플랫폼</span>
+        <h1>능력 있는 대학생을<br><span class="grad-text">쉽게 찾는 방법</span></h1>
+        <p class="lead">맺음은 대학교 이메일로 재학을 인증한 대학생 프리랜서와 의뢰인을 연결합니다. 서비스 검색부터 채팅, 전자계약, 마일스톤 관리까지 한곳에서 진행합니다.</p>
+        <p class="en" lang="en">Mejum is a freelance marketplace for verified university students in Korea.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://mejum.com">맺음 서비스 열기</a>
+          <a class="btn btn-ghost" href="#flow">진행 방식 보기</a>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="phone"><img src="app-home.png" width="780" height="904" alt="맺음 모바일 홈 화면. 서비스 검색창과 영상편집, 디자인, IT 프로그래밍 등 카테고리가 보인다."></div>
+        <span class="chip chip-a"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>재학 인증 완료</span>
+        <span class="chip chip-b"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>양측 서명 완료</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-white" id="service">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>거래에 필요한 것을 한곳에</h2>
+        <p>찾고, 이야기하고, 계약하고, 마무리할 때까지 맺음 안에서 진행합니다.</p>
+      </div>
+      <div class="feats">
+        <div class="feat">
+          <span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5Z"/><path d="M6.5 11.6V16c1.5 1.4 3.4 2 5.5 2s4-.6 5.5-2v-4.4"/><path d="M21.5 9.5v5"/></svg></span>
+          <h3>대학교 이메일 인증</h3>
+          <p>재학 중인 학교 이메일로 받은 6자리 코드로 인증한 대학생만 프리랜서로 활동합니다.</p>
+        </div>
+        <div class="feat">
+          <span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.7 15.7L21 21"/></svg></span>
+          <h3>서비스 검색</h3>
+          <p>영상편집, 디자인, IT 프로그래밍 같은 카테고리와 검색으로 필요한 서비스를 찾습니다.</p>
+        </div>
+        <div class="feat">
+          <span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5C21 15.6 20.1 16.5 19 16.5H8L4 21V5C4 3.9 4.9 3 6 3H19C20.1 3 21 3.9 21 5V14.5Z"/><path d="M9 10h.01M12.5 10h.01M16 10h.01"/></svg></span>
+          <h3>실시간 채팅</h3>
+          <p>의뢰 전후의 세부 내용을 채팅으로 바로 조율합니다.</p>
+        </div>
+        <div class="feat">
+          <span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5"/><path d="M8.5 16l2.3 2.3 4.7-5"/></svg></span>
+          <h3>전자계약과 마일스톤</h3>
+          <p>작업 범위, 대금, 기간을 계약서로 남기고 양측이 전자 서명합니다. 진행은 마일스톤으로 확인합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="flow">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>의뢰 한 건이 맺어지는 순서</h2>
+      </div>
+      <div class="flow">
+        <ol class="steps">
+          <li><span class="num">1</span><div><h3>재학 인증</h3><p>프리랜서가 대학교 이메일로 재학을 인증합니다.</p></div></li>
+          <li><span class="num">2</span><div><h3>서비스 등록과 검색</h3><p>프리랜서는 서비스를 등록하고, 의뢰인은 맞는 서비스를 찾습니다.</p></div></li>
+          <li><span class="num">3</span><div><h3>의뢰와 채팅</h3><p>의뢰를 보내면 프리랜서가 수락하거나 거절하고, 세부 내용은 채팅으로 정합니다.</p></div></li>
+          <li><span class="num">4</span><div><h3>전자계약</h3><p>계약서에 양측이 서명하면 계약이 발효됩니다. 기밀유지, 저작권 이전, 분쟁 해결 조항은 자동으로 들어갑니다.</p></div></li>
+          <li><span class="num">5</span><div><h3>마일스톤과 완료</h3><p>단계별 진행을 확인하고, 결과물을 받으면 완료 처리한 뒤 리뷰를 남길 수 있습니다.</p></div></li>
+        </ol>
+
+        <figure class="deed">
+          <div class="deed-card">
+            <div class="deed-head">전자계약서 <span class="pill">진행 중</span></div>
+            <dl class="terms">
+              <div><dt>제1조 작업 범위</dt><dd>동아리 홍보 영상 편집 (3분 분량)</dd></div>
+              <div><dt>제2조 납품물</dt><dd>최종 영상 파일 1개, 자막 포함</dd></div>
+              <div><dt>제3조 보수 및 대금</dt><dd>300,000원</dd></div>
+              <div><dt>제4조 계약 기간</dt><dd>2026.10.12 ~ 2026.10.26</dd></div>
+              <div><dt>제5조 마일스톤</dt><dd>1차 컷 편집, 최종본 납품</dd></div>
+            </dl>
+            <div class="signs">
+              <div class="sign">의뢰인 (갑)
+                <svg viewBox="0 0 160 48" preserveAspectRatio="xMinYMid meet" aria-hidden="true"><path d="M6 34c10-18 16-24 20-22s-8 26-2 26 12-22 18-22-4 20 2 20 10-14 16-14-2 12 4 12 12-10 20-10 10 6 22 4"/></svg>
+                <b>✓ 서명 완료</b>
+              </div>
+              <div class="sign">프리랜서 (을)
+                <svg viewBox="0 0 160 48" preserveAspectRatio="xMinYMid meet" aria-hidden="true"><path d="M8 30c6-14 14-22 22-20s-14 30-6 30 18-28 26-26-10 22-2 22 14-18 22-16-4 14 4 14 20-12 30-12"/></svg>
+                <b>✓ 서명 완료</b>
+              </div>
+            </div>
+          </div>
+          <figcaption>이해를 돕기 위한 예시 계약서입니다.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-white">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>맡기는 사람과 일하는 사람을 잇습니다</h2>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h3>의뢰인이라면</h3>
+          <p>재학이 확인된 대학생에게 일을 맡길 수 있습니다. 약속한 범위와 금액, 기한은 계약서에 남습니다.</p>
+        </div>
+        <img class="link" src="icon.svg" alt="">
+        <div class="side">
+          <h3>대학생이라면</h3>
+          <p>학교 이메일만 있으면 프리랜서로 시작할 수 있습니다. 구두 약속 대신 계약서와 마일스톤으로 일합니다.</p>
+        </div>
+      </div>
+      <ul class="tags" aria-label="서비스 분야">
+        <li>IT 프로그래밍</li><li>앱 개발</li><li>디자인</li><li>영상편집</li><li>사진촬영</li><li>마케팅</li><li>번역</li><li>글쓰기</li><li>교육</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <h2>맺음 소개</h2>
+          <dl class="facts">
+            <div><dt>서비스</dt><dd>대학생 프리랜서와 의뢰인을 연결하는 플랫폼</dd></div>
+            <div><dt>개발 시작</dt><dd>2025년 8월</dd></div>
+            <div><dt>기술</dt><dd>React, FastAPI, Capacitor (iOS·Android)</dd></div>
+            <div><dt>개발 방식</dt><dd>Claude Code로 개발합니다. 지금까지 커밋 284건 중 56건을 Claude와 함께 작성했습니다.</dd></div>
+            <div><dt>문의</dt><dd><a href="mailto:contact@mejum.com">contact@mejum.com</a></dd></div>
+          </dl>
+        </div>
+        <div class="about-en" lang="en">
+          <h3>About Mejum</h3>
+          <p>Mejum (맺음, “tying together”) is a freelance marketplace for university students in Korea. Freelancers verify their enrollment with a school email address. Clients find them by category and search, settle the details over real-time chat, and sign an electronic contract with milestones.</p>
+          <p>Development started in August 2025. The product is built with React, FastAPI and Capacitor, and we build it with Claude Code.</p>
+          <a class="btn btn-white" href="mailto:contact@mejum.com">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="맺음 홈"><img src="icon.svg" alt=""><span class="grad-text">맺음</span></a>
+    <p>© 2026 맺음 (Mejum)</p>
+  </div>
+</footer>
+
+</body>
+</html>
